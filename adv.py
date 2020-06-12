@@ -65,20 +65,21 @@ while stack.size() > 0:
     if player.current_room not in visited_rooms:
         # Reverse direction in case we've been in the room
         traversal_path.append(reverse[direction])
+        # push reversed direction into stack
         stack.push(reverse[direction])
+        # add room currently in to visited
         visited_rooms.add(player.current_room)
 
-    # loop through paths and check if direction is not none
+    # loop through paths and check if current room has any viable paths
     for next_direction in paths:
-        # get current room id
+        # get current room player in
         curr_room = player.current_room
         # for every room found, initialize a variable
         next_room = curr_room.get_room_in_direction(next_direction)
         # print("this is next_room",  next_room,
         #       "this is next_direction", next_direction)
-
-        if next_room and next_room not in visited_rooms:
-
+        # if room hasn't been visited and is not none, add it to traversal_path, and stack
+        if next_room != None and next_room not in visited_rooms:
             traversal_path.append(next_direction)
             stack.push(next_direction)
             break
